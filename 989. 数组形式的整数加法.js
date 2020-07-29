@@ -22,15 +22,15 @@ var addToArrayForm = function (A, K) {
 
     up = digit >= 10;
     if (up) digit = digit % 10;
-    result.unshift(digit);
+    A[i] = digit;
   }
   if (up) K++;
   if (K > 0) {
     const rest = "" + K;
     for (let i = rest.length - 1; i >= 0; i--) {
-      result.unshift(parseInt(rest[i]));
+      A.unshift(parseInt(rest[i]));
     }
   }
 
-  return result;
+  return A;
 };
