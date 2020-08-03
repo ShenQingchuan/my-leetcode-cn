@@ -1,12 +1,25 @@
-function debounce(fn, delay) {
+function debounce(fn, delay, immediate) {
   let timer = null;
-  return function (...args) {
-    let that = this;
-    clearTimeout(timer); // --- 1
-    timer = setTimeout(function () {
-      fn.apply(that, args); // --- 2  如果要立即执行，就交换一下 1 和 2
-    }, delay);
-  };
+
+  if (immediate) {
+    return function (...args) {
+      let context = this;
+      if (!timer) {
+        fn.apply(context, args);
+        timer = setTimeout(() => {
+          timer = null;
+        }, delay);
+      }
+    };
+  } else {
+    return function (...args) {
+      let context = this;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        fn.apply(context, args);
+      }, delay);
+    };
+  }
 }
 
 function throttle(fn, delay) {
