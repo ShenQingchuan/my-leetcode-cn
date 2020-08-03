@@ -1,23 +1,20 @@
 function debounce(fn, delay) {
   let timer = null;
-  return function (args) {
+  return function (...args) {
     let that = this;
-    let _args = args;
-    clearTimeout(timer);
+    clearTimeout(timer); // --- 1
     timer = setTimeout(function () {
-      fn.call(that, _args);
+      fn.apply(that, args); // --- 2  如果要立即执行，就交换一下 1 和 2
     }, delay);
   };
 }
 
 function throttle(fn, delay) {
-  let context, args;
   let previous = 0;
 
-  return function () {
+  return function (...args) {
     let now = +new Date();
-    context = this;
-    args = arguments;
+    let context = this;
     if (now - previous > delay) {
       // 这里第一次会立即执行
       fn.apply(context, args);
