@@ -3,8 +3,8 @@ function debounce(fn, delay, immediate) {
 
   if (immediate) {
     return function (...args) {
-      let context = this;
       if (!timer) {
+        let context = this;
         fn.apply(context, args);
         timer = setTimeout(() => {
           timer = null;
