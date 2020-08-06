@@ -86,24 +86,29 @@ Animal.staticFunc = function () {
 };
 
 let a = new Animal("Tomy");
+console.log("Animal object: ", a);
 a.greet();
 a.anyFunc();
 Animal.staticFunc();
 
 function Dog(name) {
+  Animal.call(this, name);
   this.greet = function () {
     console.log("Dog: I am " + this.name);
   };
 }
 _inheritAdvancedParasiticComposition(Dog, Animal); // Dog extends Animal
 let d = new Dog("Bob");
+console.log("Dog object: ", d);
 d.greet();
 d.anyFunc(); // 继承父类方法
 
 /** Node 打印结果如下：
+Animal object:  Animal { name: 'Tomy', greet: [Function] }
 I am Tomy
 Animal anyFunc: this ->  Animal { name: 'Tomy', greet: [Function] }
 Animal staticFunc? ->  [Function: Animal] { staticFunc: [Function] }
-Dog: I am undefined
-Animal anyFunc: this ->  Dog { greet: [Function] }
+Dog object:  Dog { name: 'Bob', greet: [Function] }
+Dog: I am Bob
+Animal anyFunc: this ->  Dog { name: 'Bob', greet: [Function] }
  */
