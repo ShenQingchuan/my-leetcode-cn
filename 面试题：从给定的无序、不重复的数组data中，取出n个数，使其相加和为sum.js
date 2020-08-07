@@ -2,6 +2,7 @@
  * @param {any[]} arr
  * @param {number} n
  * @param {number} sum
+ * @returns {boolean}
  */
 function findGroup(arr, n, sum) {
   if (sum === 0 && n === 0) {

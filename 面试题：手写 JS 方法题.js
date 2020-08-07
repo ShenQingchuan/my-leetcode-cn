@@ -16,8 +16,8 @@ Function.prototype.mapply = function (context, args = []) {
 
 Function.prototype.mbind = function (context, ...args) {
   const _this = this;
-  return function Bind(...newArgs) {
-    if (this instanceof Bind) {
+  return function Bound(...newArgs) {
+    if (this instanceof Bound) {
       return _this.mapply(this, [...args, ...newArgs]);
     }
     return _this.mapply(context, [...args, ...newArgs]);
@@ -26,6 +26,7 @@ Function.prototype.mbind = function (context, ...args) {
 
 function _new1() {
   let obj = new Object();
+  // 取出第一个参数，即构造函数
   let constructorFunc = Array.prototype.shift.call(arguments);
   obj.__proto__ = constructorFunc.prototype;
   constructorFunc.apply(obj, arguments);
