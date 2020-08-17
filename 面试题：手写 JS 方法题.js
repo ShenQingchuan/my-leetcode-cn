@@ -23,7 +23,7 @@ Function.prototype.mbind = function (context, ...args) {
   };
 };
 
-// new 方法实现
+// 手写 new 方法实现
 function _new1() {
   let obj = new Object();
   // 取出第一个参数，即构造函数
@@ -44,6 +44,20 @@ function _new2(constructorFunc, ...args) {
   let obj = Object.mcreate(constructorFunc.prototype);
   let result = constructorFunc.apply(obj, args);
   return result;
+}
+// 手写 instanceof
+function _instanceof(target, origin) {
+  // 非 object 直接返回 false
+  if (typeof target !== "object" || target === null) return false;
+
+  let proto = Object.getPrototypeOf(target);
+  while (proto) {
+    if (proto === origin.prototype) {
+      return true;
+    }
+    proto = Object.getPrototypeOf(proto); // 原型链上溯
+  }
+  return false;
 }
 
 // 手写 Promise.all
