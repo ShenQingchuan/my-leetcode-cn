@@ -20,6 +20,8 @@ let obj = {
     };
     testObjFnInlineFn(); // 内联函数 this 与当前对象保持一致
 
+    testIndependentCall(); // 在对象内部再独立调用：同样还是 undefined
+
     return testObjFnInnerFn;
   },
 };

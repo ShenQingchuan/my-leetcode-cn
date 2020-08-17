@@ -6,6 +6,7 @@ async function async1() {
 async function async2() {
   console.log("async2");
 }
+
 console.log("script start");
 setTimeout(function () {
   console.log("setTimeout");
