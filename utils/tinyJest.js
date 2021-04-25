@@ -31,13 +31,13 @@ function test(name, fn) {
   currentCase.units.forEach((unit, index) => {
     if (!unit.result) {
       console.log(
-        `(${index + 1}/${unitLength}) ${red('ERROR: ')}\t ${bold(
+        `(${index + 1}/${unitLength}) ${bold(red('ERROR: '))} ${bold(
           whiteBright(unit.failedMessage)
         )}`
       );
     } else {
       console.log(
-        `(${index + 1}/${unitLength}) ${green('PASS: ')}\t ${bold(
+        `(${index + 1}/${unitLength}) ${bold(green('PASS: '))}  ${bold(
           whiteBright(unit.passMessage)
         )}`
       );
