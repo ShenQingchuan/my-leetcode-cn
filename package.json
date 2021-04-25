@@ -1,0 +1,24 @@
+{
+  "name": "leetcode-cn-shenqingchuan",
+  "version": "1.0.0",
+  "description": "leetcode playground and solutions for github:ShenQingchuan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShenQingchuan/my-leetcode-cn.git"
+  },
+  "keywords": [
+    "leetcode"
+  ],
+  "author": "ShenQingchuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShenQingchuan/my-leetcode-cn/issues"
+  },
+  "homepage": "https://github.com/ShenQingchuan/my-leetcode-cn#readme",
+  "dependencies": {
+    "@types/node": "^14.14.41",
+    "@types/underscore": "^1.11.2",
+    "chalk": "^4.1.1",
+    "underscore": "^1.13.1"
+  }
+}

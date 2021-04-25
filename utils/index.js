@@ -1,7 +1,9 @@
-const ArrayToLinkedList = require("./ArrayToLinkedList");
-const BinaryTree = require("./BinaryTree");
+const exportsFromArrayToLinkedList = require('./LinkedList');
+const exportsFromBinaryTree = require('./BinaryTree');
+const exportsFromTinyJest = require('./tinyJest');
 
 module.exports = {
-  ArrayToLinkedList,
-  BinaryTree,
+  ...exportsFromArrayToLinkedList,
+  ...exportsFromBinaryTree,
+  ...exportsFromTinyJest
 };

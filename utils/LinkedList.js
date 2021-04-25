@@ -26,15 +26,15 @@ module.exports = {
     if (!node) return;
 
     let pointer = node,
-      res = "";
+      res = '';
     while (pointer) {
-      res += `${pointer.val}${pointer.next ? "->" : ""}`;
+      res += `${pointer.val}${pointer.next ? '->' : ''}`;
       pointer = pointer.next;
     }
 
     console.log(res);
   },
-  /** 打印单链表
+  /** 逆转单链表
    * @param {ListNode} node
    */
   reverseLinkedList(node) {
@@ -45,9 +45,7 @@ module.exports = {
       next.next = pre;
       pre = next;
       next = cc;
-      // 下面是上面4行代码的简写（es6的解构赋值，简化了多行的赋值代码）
-      // [nxt.next, pre, nxt]=[pre, nxt, nxt.next]
     }
     return pre;
-  },
+  }
 };
