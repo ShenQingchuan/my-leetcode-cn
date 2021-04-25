@@ -1,8 +1,8 @@
 const _ = require('underscore');
-const { red, green, whiteBright, blueBright, bold } = require('chalk');
+const { red, green, whiteBright, blueBright, bold, gray } = require('chalk');
 
-const TestStatus = {
-  WAITING: -1,
+/** enum */ const TestStatus = {
+  NOT_TRIGGERD: -1,
   FAILED: 0,
   PASS: 1
 };
@@ -15,11 +15,8 @@ let currentCase = null;
  * @param {() => void} fn
  */
 function test(name, fn) {
-  console.log(`* 测试 ${blueBright(name)}`);
-
   let newCase = {
     name,
-    status: TestStatus.WAITING,
     units: []
   };
   testCases.push(newCase);
@@ -28,18 +25,20 @@ function test(name, fn) {
   fn(); // 运行测试内容函数，装载测试单元
 
   const unitLength = currentCase.units.length;
+
+  console.log(`* ${bold('测试')} ${blueBright(name)}`);
   currentCase.units.forEach((unit, index) => {
-    if (!unit.result) {
+    if (unit.result === TestStatus.FAILED) {
       console.log(
-        `(${index + 1}/${unitLength}) ${bold(red('ERROR: '))} ${bold(
-          whiteBright(unit.failedMessage)
-        )}`
+        `  ${gray(`(${index + 1}/${unitLength})`)} ${bold(
+          red('ERROR: ')
+        )} ${bold(whiteBright(unit.failedMessage))}`
       );
-    } else {
+    } else if (unit.result === TestStatus.PASS) {
       console.log(
-        `(${index + 1}/${unitLength}) ${bold(green('PASS: '))}  ${bold(
-          whiteBright(unit.passMessage)
-        )}`
+        `  ${gray(`(${index + 1}/${unitLength})`)} ${bold(
+          green('PASS: ')
+        )}  ${bold(whiteBright(unit.passMessage))}`
       );
     }
   });
@@ -50,18 +49,20 @@ function test(name, fn) {
  */
 function expect(inputValue) {
   const unit = {
-    result: TestStatus.WAITING,
+    result: TestStatus.NOT_TRIGGERD,
     passMessage: '',
     failedMessage: ''
   };
 
   const returns = {
     toBe: (matchValue) => {
-      const result = _.isEqual(inputValue, matchValue);
+      const result = _.isEqual(inputValue, matchValue)
+        ? TestStatus.PASS
+        : TestStatus.FAILED;
       unit.result = result;
       unit.passMessage = `  input value: ${blueBright(
         inputValue
-      )} equals expected value: ${blueBright(matchValue)}`;
+      )} equals to expected value: ${blueBright(matchValue)}`;
       unit.failedMessage = `  input value: ${blueBright(
         inputValue
       )} is not as expected value: ${blueBright(matchValue)}`;
